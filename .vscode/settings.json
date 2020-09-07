@@ -2,7 +2,12 @@
     "files.associations": {
         "*.cpp": "cpp",
         "*.m": "matlab",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "vector": "cpp",
+        "cmath": "cpp",
+        "complex": "cpp",
+        "*.tcc": "cpp",
+        "deque": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
