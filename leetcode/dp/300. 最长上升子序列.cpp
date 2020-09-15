@@ -18,6 +18,11 @@
 class Solution {
 public:
 // 时间复杂度：o(n^2)
+// # 动态规划：
+// # 定义dp[n]：表示以nums[n]这个数结尾的最长递增子序列的长度
+// # 递推公式：dp[i] = max(dp[j]+1)， for j in range(i) and nums[i] > nums[j]
+// # 初始值：dp[0] = 1
+// # 最终问题解：max(dp) dp缓存数组里的最大值即为最长上升子序列的长度
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
         if (n<=1) return n;
@@ -38,6 +43,9 @@ public:
         return max;
     }
 // 时间复杂度：o(nlogn)
+// # 时间复杂度：o(nlogn)
+// # https://blog.csdn.net/qq_41765114/article/details/88415541
+// # 定义dp[n]：dp[i] 表示长度为 i 的最长递增子序列（LIS）末尾的数
     int lengthOfLIS2(vector<int>& nums) {
         int n = nums.size();
         if (n<=1) return n;
