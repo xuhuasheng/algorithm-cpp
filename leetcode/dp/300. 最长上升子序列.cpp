@@ -55,11 +55,14 @@ public:
             int left = 0;
             int right = length;
             // 二分法
+            // 搜索区间 [left, right)
             while (left < right) {
                 int mid = (left+right)/2;
-                if (dp[mid] < num)
+                if (dp[mid] == num)
+                    right = mid;
+                else if (dp[mid] < num)
                     left = mid+1;
-                else
+                else if (dp[mid] > num)
                     right = mid;
             }
             dp[left] = num;
