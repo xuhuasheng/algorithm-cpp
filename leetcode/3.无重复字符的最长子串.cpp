@@ -26,16 +26,16 @@ public:
     int lengthOfLongestSubstring(string s) {
         unordered_set<char> check;
         int n = s.size();
-        int rk = -1, ans = 0;
-        for (int i=0; i<n; i++) {
-            if (i != 0) {
-                check.earse(s[i-1]);
+        int right = 0, ans = 0;
+        for (int left=0; left<n; left++) {
+            if (left != 0) {
+                check.erase(s[left-1]);
             }
-            while (rk+1 < n && !check.count(s[rk+1])) {
-                check.insert(s[rk+1]);
-                rk ++;
+            while (right+1 < n && !check.count(s[right])) {
+                check.insert(s[right]);
+                right ++;
             }
-            ans = max(ans, rk - i + 1);
+            ans = max(ans, right - left);
         }
         return ans
     }
