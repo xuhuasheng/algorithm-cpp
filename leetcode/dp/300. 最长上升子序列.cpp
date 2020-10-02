@@ -27,20 +27,22 @@ public:
         int n = nums.size();
         if (n<=1) return n;
         vector<int> dp(n, 1);
+        int res = 0;
         for (int i=1; i<n; i++) {
             for (int j=0; j<i; j++) {
                 if (nums[j] < nums[i]) {
                     dp[i] = max(dp[i], dp[j]+1);
                 }
             }
+            res = max(res, dp[i]);
         }
-        int max = 0;
-        for (int i=0; i<n; i++) {
-            if (dp[i] > max) {
-                max = dp[i];
-            }
-        }
-        return max;
+        // int max = 0;
+        // for (int i=0; i<n; i++) {
+        //     if (dp[i] > max) {
+        //         max = dp[i];
+        //     }
+        // }
+        return res;
     }
 // 时间复杂度：o(nlogn)
 // # 时间复杂度：o(nlogn)

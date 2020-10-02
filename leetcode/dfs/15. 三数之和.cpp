@@ -52,3 +52,42 @@ public:
         }
     }
 };
+
+// https://leetcode-cn.com/problems/3sum/solution/pai-xu-shuang-zhi-zhen-zhu-xing-jie-shi-python3-by/
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        int n = nums.size();
+        if (n<3) return {};
+
+        // 排序-剪枝前提
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> res;
+
+        for (int i=0; i<n; i++) {
+            // 大剪枝
+            if (nums[i] > 0) break;
+            // 小剪枝
+            if (i > 0 && nums[i] == nums[i-1]) continue;
+            // 双指针
+            int left = i+1;
+            int right = n-1;
+            while (left < right) {
+                if (nums[i] + nums[left] + nums[right] == 0) {
+                    res.push_back({nums[i], nums[left], nums[right]});
+                    // 避免重复
+                    while (left < right && nums[left] == nums[left+1]) left ++;
+                    while (left < right && nums[right] == nums[right-1]) right --;
+                    // 更新指针
+                    left ++;
+                    right --;
+                } else if (nums[i] + nums[left] + nums[right] < 0) {
+                    left ++;
+                } else {
+                    right --;
+                }
+            }
+        }
+        return res;
+    }
+};
