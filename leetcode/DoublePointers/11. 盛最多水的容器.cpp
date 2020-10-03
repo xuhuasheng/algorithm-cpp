@@ -22,13 +22,17 @@ public:
     int maxArea(vector<int>& height) {
         int n = height.size();
         int res = 0;
+        // 首尾双指针
         int i = 0;
         int j = n-1;
         while (i<j) {
             if (height[i] < height[j]) {
+                // 左低于右，只有向右移动左指针，才有可能获得更大的值
+                // 因为移动右指针，得到的结果肯定比现在小
                 res = max(res, height[i] * (j-i));
                 i += 1;
             } else {
+                // 同理
                 res = max(res, height[j] * (j-i));
                 j -= 1;
             }

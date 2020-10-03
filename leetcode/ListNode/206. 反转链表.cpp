@@ -25,7 +25,7 @@ public:
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr) return NULL;
         ListNode* node = head;
-        while (node->next != NULL) {
+        while (node->next) {
             ListNode* nextnode = node->next;
             node->next = nextnode->next;
             nextnode->next = head;
