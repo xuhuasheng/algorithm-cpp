@@ -22,7 +22,7 @@
 
 class Solution {
 public:
-    int dir[4][4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int dir[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int newColor) {
         int oriColor = image[sr][sc];
         if (oriColor != newColor) {

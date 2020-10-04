@@ -34,7 +34,7 @@
 
 class Solution {
 public:
-    int dir[4][4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int dir[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     int numIslands(vector<vector<char>>& grid) {
         int m = grid.size();
         if (m == 0) return 0;
