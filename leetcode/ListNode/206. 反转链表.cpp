@@ -38,12 +38,13 @@ public:
     // 递归
     ListNode* reverseList(ListNode* head) {
         if (head == nullptr) return NULL;
-        ListNode* node = head;
-        ListNode* nextnode = node->next;
+        
+        ListNode* nextnode = head->next;
         if (nextnode == nullptr) return head;
+
         ListNode* newhead = reverseList(nextnode);
-        nextnode->next = node;
-        node->next = NULL;
+        nextnode->next = head;
+        head->next = NULL;
         return newhead;
     }
 };
