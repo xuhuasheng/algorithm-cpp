@@ -26,6 +26,7 @@
 //  */
 class Solution {
 public:
+// 用栈迭代
     vector<int> inorderTraversal(TreeNode* root) {
         stack<TreeNode*> stack;
         vector<int> res;
@@ -42,4 +43,22 @@ public:
         return res;        
     }
 
+};
+
+// 递归
+class Solution {
+public:
+    void inorder(TreeNode* root, vector<int>& res) {
+        if (!root) {
+            return;
+        }
+        inorder(root->left, res);
+        res.push_back(root->val);
+        inorder(root->right, res);
+    }
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        inorder(root, res);
+        return res;
+    }
 };
