@@ -30,7 +30,7 @@
 // # https://leetcode-cn.com/problems/word-search/solution/zai-er-wei-ping-mian-shang-shi-yong-hui-su-fa-pyth/
 class Solution {
 public:
-    int dir[4][4] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int dir[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
     bool exist(vector<vector<char>>& board, string word) {
         int m = board.size();
         int n = board[0].size();

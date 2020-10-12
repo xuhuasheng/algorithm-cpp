@@ -27,18 +27,23 @@ public:
     }
 
     void dfs(int size, int begin, int target, vector<int>& track, vector<vector<int>>& res) {
-        if (track.size() == size && target == 0) {
-            res.push_back(track);
-            return;
-        }
-        for (int i=begin; i<=9; i++) {
-            // 剪枝
-            if (target - i < 0) {
-                break;
+        if (track.size() == size ) {
+            if (target == 0) {
+                res.push_back(track);
+                return;
             }
-            track.push_back(i);
-            dfs(size, i+1, target-i, track, res);
-            track.pop_back();
         }
+        else {
+            for (int i=begin; i<=9; i++) {
+                // 剪枝
+                if (target - i < 0) {
+                    break;
+                }
+                track.push_back(i);
+                dfs(size, i+1, target-i, track, res);
+                track.pop_back();
+            }
+        }
+        
     }
 };

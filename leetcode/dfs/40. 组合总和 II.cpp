@@ -1,6 +1,6 @@
 // 给定一个数组 candidates 和一个目标数 target ，
 // 找出 candidates 中所有可以使数字和为 target 的组合。
-// candidates 中的每个数字在每个组合中只能使用一次。
+// candidates 中的每个数字在每个组合中*只能使用一次*，*可能有重复的候选数*。
 
 // 说明：
 
@@ -54,6 +54,7 @@ public:
             }
             // 小剪枝：同一层相同数值的结点，从第 2 个开始，候选数更少，结果一定发生重复，因此跳过，用 continue
             // 防止 [1, 2', 2''] 和 [1, 2'', 2']的重复
+            // (题目特征：候选序列可包含重复数字)
             if (i>begin && candidates[i-1] == candidates[i]) {
                 continue;
             }
