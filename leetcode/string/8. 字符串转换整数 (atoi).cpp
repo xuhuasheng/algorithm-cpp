@@ -47,33 +47,80 @@
 // 链接：https://leetcode-cn.com/problems/string-to-integer-atoi
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
+// 法1
+// 直接解法
+// time:    o(n)
+// space:   o(1)
+class Solution {
+public:
+    int myAtoi(string str) {
+        int res = 0;
+        int i = 0;
+        int sign = 1;
+        // 1.跳过前面的空格
+        while (str[i] == ' ') i++;
+        // 2.判断正负号
+        if (str[i] == '-') flag = -1;
+        if (str[i] == '+' || str[i] == '-') i++;
+        // 3.读取有效数字
+        while (i < str.size() && isdigit(str[i])) {
+            int digit = str[i] - '0';
+            // 判断是否正数溢出，INT_MAX逆运算，INT_MIN也适用
+            if (res > INT_MAX/10 || (res==INT_MAX/10 && r>7)) {
+                return sign > 0 ? INT_MAX : INT_MIN;
+            }
+            // 数字推入：左移历史数据 + 当前数字
+            res = res * 10 + r;
+            i++;
+        }
+        return sign > 0 ? res : -res;
+    }
+};
 
+// 法2
 // https://leetcode-cn.com/problems/string-to-integer-atoi/solution/zi-fu-chuan-zhuan-huan-zheng-shu-atoi-by-leetcode-/
 // 自动机
 // 确定有限状态机（deterministic finite automaton, DFA）
+// 时间复杂度：o(n)
+// 空间复杂度：o(1)
 class Automaton {
+private:
+    // 初始状态
     string state = "start";
+    // 有限状态机的表格
     unordered_map<string, vector<string>> table = {
-        {"start", {"start", "signed", "in_number", "end"}},
-        {"signed", {"end", "end", "in_number", "end"}},
-        {"in_number", {"end", "end", "in_number", "end"}},
-        {"end", {"end", "end", "end", "end"}}
+        //            ' '        '+/-'    'digit'      'other'
+        {"start",     {"start", "signed", "in_number", "end"}},
+        {"signed",    {"end",   "end",    "in_number", "end"}},
+        {"in_number", {"end",   "end",    "in_number", "end"}},
+        {"end",       {"end",   "end",    "end",       "end"}}
     };
 
-    int get_col(char c) {
-        if (isspace(c)) return 0;
-        if (c == '+' or c == '-') return 1;
-        if (isdigit(c)) return 2;
-        return 3;
+    // 根据条件返回对应列索引
+    int condition_idx(char c) {
+        if (isspace(c)) 
+            return 0;
+        else if (c == '+' or c == '-') 
+            return 1;
+        else if (isdigit(c)) 
+            return 2;
+        else
+            return 3;
     }
+
 public:
+    // 有限状态机维护的数据
     int sign = 1;
     long long ans = 0;
 
     void get(char c) {
-        state = table[state][get_col(c)];
+        // 更新状态 <- 当前状态 和 当前条件
+        state = table[state][condition_idx(c)];
+        // 根据最新状态，维护数据
         if (state == "in_number") {
+            // 推入数字
             ans = ans * 10 + c - '0';
+            // 溢出处理
             ans = sign == 1 ? min(ans, (long long)INT_MAX) : min(ans, -(long long)INT_MIN);
         }
         else if (state == "signed")
