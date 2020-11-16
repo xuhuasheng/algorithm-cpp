@@ -31,7 +31,6 @@ public:
             nextnode->next = head;
             head = nextnode;
         }
-        node->next = NULL;
         return head;
     }
 
