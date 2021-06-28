@@ -31,6 +31,6 @@ public:
             rev = rev*10 + num%10;
             num /= 10;
         }
-        return num == rev;
+        return x == rev;
     }
 };
